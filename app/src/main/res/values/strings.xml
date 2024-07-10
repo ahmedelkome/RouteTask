@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Route-Task</string>
+    <string name="review">Review</string>
+    <string name="filter">Filter</string>
 </resources>
