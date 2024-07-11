@@ -1,8 +1,9 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
-    id("kotlin-kapt")
-    id("com.google.dagger.hilt.android")
+    id ("kotlin-android")
+    id ("kotlin-kapt")
+    id ("dagger.hilt.android.plugin")
 }
 
 android {
@@ -41,14 +42,17 @@ android {
     }
 }
 
-
+kapt {
+    correctErrorTypes = true
+}
 dependencies {
 
     //Rounded Image
     implementation (libs.roundedimageview)
     //Hilt
-    implementation(libs.hilt.android)
-    kapt(libs.hilt.android.compiler)
+    implementation (libs.hilt.android)  // replace with the latest version
+    kapt (libs.hilt.android.compiler.v248)
+
     //ViewModelLifeCycle
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     // LiveData
@@ -67,7 +71,4 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-}
-kapt {
-    correctErrorTypes = true
 }

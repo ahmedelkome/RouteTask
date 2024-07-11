@@ -3,7 +3,6 @@ package com.route.data.datasource
 import com.route.data.api.WebService
 import com.route.data.contract.ProductOnlineDataSource
 import com.route.domain.models.Product
-
 import javax.inject.Inject
 
 class ProductOnlineDataSourceImpl @Inject constructor(

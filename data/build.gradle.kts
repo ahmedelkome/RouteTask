@@ -1,8 +1,10 @@
+
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
-    id("kotlin-kapt")
-    id("com.google.dagger.hilt.android")
+    id("kotlin-android")
+    id ("kotlin-kapt")
+//    id ("dagger.hilt.android.plugin")
 }
 
 android {
@@ -33,12 +35,15 @@ android {
         jvmTarget = "1.8"
     }
 }
-
+kapt {
+    correctErrorTypes = true
+}
 dependencies {
 
     //Hilt
-    implementation(libs.hilt.android)
-    kapt(libs.hilt.android.compiler)
+    implementation (libs.hilt.android)  // replace with the latest version
+    kapt (libs.hilt.android.compiler.v248)
+
     //Retrofit
     implementation (libs.retrofit)
     implementation (libs.converter.gson)
@@ -50,7 +55,4 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-}
-kapt {
-    correctErrorTypes = true
 }
