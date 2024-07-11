@@ -2,9 +2,9 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
-    id("kotlin-android")
+    id ("kotlin-android")
     id ("kotlin-kapt")
-//    id ("dagger.hilt.android.plugin")
+    id ("dagger.hilt.android.plugin")
 }
 
 android {
@@ -42,8 +42,8 @@ dependencies {
 
     //Hilt
     implementation (libs.hilt.android)  // replace with the latest version
-    kapt (libs.hilt.android.compiler.v248)
-
+    kapt (libs.hilt.compiler)
+    annotationProcessor (libs.hilt.compiler)
     //Retrofit
     implementation (libs.retrofit)
     implementation (libs.converter.gson)

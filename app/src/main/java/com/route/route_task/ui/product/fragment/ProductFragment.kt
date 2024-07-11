@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import com.route.domain.models.Product
 import com.route.route_task.R
 import com.route.route_task.databinding.FragmentProductBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -16,6 +18,7 @@ class ProductFragment : Fragment() {
     var dialog: AlertDialog? = null
     private var _binding: FragmentProductBinding? = null
     val binding get() = _binding!!
+    val productFragmentViewModel: ProductFragmentViewModel by viewModels<ProductFragmentViewModel>()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -25,10 +28,44 @@ class ProductFragment : Fragment() {
         return binding.root
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        getProducts()
+        observeLiveData()
     }
+
+    private fun getProducts() {
+        productFragmentViewModel.getAllProducts()
+    }
+
+    private fun observeLiveData() {
+        productFragmentViewModel.loadingLiveData.observe(viewLifecycleOwner) {
+            if (it) {
+                showLoading()
+            } else {
+                hideLoading()
+            }
+        }
+        productFragmentViewModel.errorMessage.observe(viewLifecycleOwner) {
+            showError(
+                title = it.title,
+                message = it.message,
+                posTitle = it.posTitle,
+                navTitle = it.navTitle,
+                posBtn = it.posBtn!!,
+                navBtn = it.navBtn!!
+
+            )
+        }
+        productFragmentViewModel.prodcutListLiveData.observe(viewLifecycleOwner){
+            bindProduct(it)
+        }
+    }
+
+    private fun bindProduct(it: List<Product>) {
+
+    }
+
 
     private fun showLoading() {
         val builder = AlertDialog.Builder(requireActivity())
@@ -64,5 +101,10 @@ class ProductFragment : Fragment() {
             }
             .create()
             .show()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 }

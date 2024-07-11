@@ -5,7 +5,9 @@
 
     <data>
 
-
+        <variable
+            name="product"
+            type="com.route.domain.models.Product" />
     </data>
 
     <com.google.android.material.card.MaterialCardView

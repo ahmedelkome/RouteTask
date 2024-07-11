@@ -1,7 +1,9 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
+    id ("kotlin-android")
     id ("kotlin-kapt")
+    id ("dagger.hilt.android.plugin")
 
 }
 
@@ -39,8 +41,8 @@ kapt {
 dependencies {
     //Hilt
     implementation (libs.hilt.android)  // replace with the latest version
-    kapt (libs.hilt.android.compiler.v248)
-
+    kapt (libs.hilt.compiler)
+    annotationProcessor (libs.hilt.compiler)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)

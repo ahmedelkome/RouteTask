@@ -1,16 +1,17 @@
 import org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootPlugin.Companion.kotlinNpmResolutionManager
 
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
-buildscript {
-    repositories {
-        google()
-        mavenCentral()
-    }
-    dependencies {
-        classpath (libs.gradle)  // replace with your version
-        classpath (libs.hilt.android.gradle.plugin)  // replace with the latest version
-    }
-}
+//buildscript {
+//    repositories {
+//        google()
+//        mavenCentral()
+//    }
+//    dependencies {
+//        classpath (libs.gradle)  // replace with your version
+//        classpath (libs.hilt.android.gradle.plugin)  // replace with the latest version
+//
+//    }
+//}
 
 
 plugins {

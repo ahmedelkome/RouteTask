@@ -50,17 +50,23 @@ dependencies {
     //Rounded Image
     implementation (libs.roundedimageview)
     //Hilt
-    implementation (libs.hilt.android)  // replace with the latest version
-    kapt (libs.hilt.android.compiler.v248)
+    implementation (libs.hilt.android)
+    kapt (libs.hilt.compiler)// replace with the latest version
+    annotationProcessor (libs.hilt.compiler)
 
-    //ViewModelLifeCycle
-    implementation(libs.androidx.lifecycle.viewmodel.ktx)
-    // LiveData
-    implementation(libs.androidx.lifecycle.livedata.ktx)
     //Shimmer Effect
     implementation (libs.shimmer)
     //Gilde
     implementation (libs.glide)
+    //lifeCycle ViewModel
+    // ViewModel
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    // LiveData
+    implementation(libs.androidx.lifecycle.livedata.ktx)
+    kapt (libs.androidx.hilt.compiler)
+
+    implementation (libs.androidx.fragment.ktx)
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
