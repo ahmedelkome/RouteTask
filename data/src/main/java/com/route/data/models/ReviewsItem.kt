@@ -2,7 +2,7 @@ package com.route.data.models
 
 import com.google.gson.annotations.SerializedName
 
-data class Review(
+data class ReviewsItem(
 
 	@field:SerializedName("date")
 	val date: String? = null,

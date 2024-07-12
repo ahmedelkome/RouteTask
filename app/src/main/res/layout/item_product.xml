@@ -29,7 +29,8 @@
                 android:layout_width="180dp"
                 android:layout_height="120dp"
                 android:scaleType="centerCrop"
-                android:src="@color/cardview_dark_background"
+                tools:src="@color/cardview_dark_background"
+                imageUrl="@{product.thumbnail}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -44,13 +45,29 @@
                 android:fontFamily="@font/poppins_medium"
                 android:lines="1"
                 android:maxLines="1"
-
+                android:text="@{product.title}"
                 android:textColor="@color/dark_blue"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/product_img"
                 tools:text="asdasdasdad sasadasddad" />
+            <TextView
+                android:id="@+id/product_description"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:fontFamily="@font/poppins_medium"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:text="@{product.description}"
+                android:textColor="@color/dark_blue"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/product_name"
+                tools:text="asdasdasdad sacsasacsa sacascssadasddad" />
 
 
             <androidx.cardview.widget.CardView
@@ -84,11 +101,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/poppins_regular"
-
+                android:text="@{product.price.toString()}"
                 android:textColor="@color/dark_blue"
                 android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="@id/product_name"
-                app:layout_constraintTop_toBottomOf="@id/product_name"
+                app:layout_constraintTop_toBottomOf="@id/product_description"
                 tools:text="EGP1,200" />
 
             <TextView
@@ -97,7 +114,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:fontFamily="@font/poppins_regular"
-
+                android:text="@{product.discountPercentage.toString()}"
                 android:textColor="@color/pale_blue"
                 android:textSize="11sp"
                 app:layout_constraintBottom_toBottomOf="@id/product_price"
@@ -125,7 +142,7 @@
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/poppins_regular"
-
+                android:text="@{product.rating.toString()}"
                 android:textColor="@color/dark_blue"
                 android:textSize="12sp"
                 app:layout_constraintStart_toEndOf="@id/review_tv"

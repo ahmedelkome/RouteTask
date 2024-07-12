@@ -7,6 +7,8 @@ import com.route.domain.models.Product
 import com.route.domain.usecase.GetProductUseCase
 import com.route.route_task.ui.models.ViewMessage
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -23,8 +25,8 @@ constructor(
         try {
             loadingLiveData.value = true
             viewModelScope.launch {
-                val list = getProductUseCase.getALlProduct()
-                prodcutListLiveData.value = list
+                val listOfProduct = getProductUseCase.getALlProduct()
+                prodcutListLiveData.postValue(listOfProduct)
                 loadingLiveData.value = false
             }
         } catch (e: Exception) {

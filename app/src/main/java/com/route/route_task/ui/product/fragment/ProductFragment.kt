@@ -1,6 +1,7 @@
 package com.route.route_task.ui.product.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,10 +12,12 @@ import androidx.fragment.app.viewModels
 import com.route.domain.models.Product
 import com.route.route_task.R
 import com.route.route_task.databinding.FragmentProductBinding
+import com.route.route_task.ui.product.fragment.adapter.ProductAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class ProductFragment : Fragment() {
+    private var adapter: ProductAdapter? = null
     var dialog: AlertDialog? = null
     private var _binding: FragmentProductBinding? = null
     val binding get() = _binding!!
@@ -30,8 +33,14 @@ class ProductFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initRecyclerView()
         getProducts()
         observeLiveData()
+    }
+
+    private fun initRecyclerView() {
+        adapter = ProductAdapter(listOf())
+        binding.rvProduct.adapter = adapter
     }
 
     private fun getProducts() {
@@ -57,13 +66,16 @@ class ProductFragment : Fragment() {
 
             )
         }
-        productFragmentViewModel.prodcutListLiveData.observe(viewLifecycleOwner){
+        productFragmentViewModel.prodcutListLiveData.observe(viewLifecycleOwner) {
             bindProduct(it)
         }
     }
 
-    private fun bindProduct(it: List<Product>) {
-
+    private fun bindProduct(list: List<Product>) {
+        adapter?.let {
+            it.updateList(list)
+        }
+        binding.rvProduct.adapter = adapter
     }
 
 
@@ -99,8 +111,7 @@ class ProductFragment : Fragment() {
             .setNegativeButton(navTitle) { _, _ ->
                 navBtn.invoke()
             }
-            .create()
-            .show()
+            dialog.create().show()
     }
 
     override fun onDestroy() {

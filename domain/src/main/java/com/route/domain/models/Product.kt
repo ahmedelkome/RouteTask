@@ -1,11 +1,13 @@
 package com.route.domain.models
 
-data class Product(
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 
-    val images: List<String?>? = null,
+@Parcelize
+data class Product(
+    val thumbnail: String? = null,
     val rating: Double? = null,
     val description: String? = null,
     val title: String? = null,
     val discountPercentage: Double? = null,
-    val price: Double? = null,
-    )
+    val price: Double? = null):Parcelable
