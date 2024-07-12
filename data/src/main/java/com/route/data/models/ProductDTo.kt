@@ -3,7 +3,7 @@ package com.route.data.models
 import com.google.gson.annotations.SerializedName
 import com.route.domain.models.Product
 
-data class Product(
+data class ProductDTo(
 
 	@field:SerializedName("images")
 	val images: List<String?>? = null,
@@ -39,7 +39,7 @@ data class Product(
 	val discountPercentage: Double? = null,
 
 	@field:SerializedName("reviews")
-	val reviews: List<Review?>? = null,
+	val reviews: List<ReviewsItem?>? = null,
 
 	@field:SerializedName("price")
 	val price: Double? = null,
@@ -70,15 +70,15 @@ data class Product(
 
 	@field:SerializedName("brand")
 	val brand: String? = null
-){
-	fun toProduct():Product{
+) {
+	fun toProduct(): Product {
 		return Product(
-			images = images,
-			rating = rating,
-			description = description,
 			title = title,
-			discountPercentage = discountPercentage,
-			price = price
+			description = description,
+			thumbnail = thumbnail,
+			rating = rating,
+			price = price,
+			discountPercentage = discountPercentage
 		)
 	}
 }
