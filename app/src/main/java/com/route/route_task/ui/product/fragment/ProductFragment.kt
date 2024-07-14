@@ -1,5 +1,6 @@
 package com.route.route_task.ui.product.fragment
 
+import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -34,7 +35,7 @@ class ProductFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initRecyclerView()
-        getProducts()
+
         observeLiveData()
     }
 
@@ -44,27 +45,32 @@ class ProductFragment : Fragment() {
     }
 
     private fun getProducts() {
-        productFragmentViewModel.getAllProducts()
+
     }
 
     private fun observeLiveData() {
+        productFragmentViewModel.getAllProducts()
         productFragmentViewModel.loadingLiveData.observe(viewLifecycleOwner) {
-            if (it) {
+            if (it == true) {
                 showLoading()
             } else {
                 hideLoading()
             }
         }
         productFragmentViewModel.errorMessage.observe(viewLifecycleOwner) {
-            showError(
-                title = it.title,
-                message = it.message,
-                posTitle = it.posTitle,
-                navTitle = it.navTitle,
-                posBtn = it.posBtn!!,
-                navBtn = it.navBtn!!
+            it.posBtn?.let { it1 ->
+                it.navBtn?.let { it2 ->
+                    showError(
+                        title = it.title,
+                        message = it.message,
+                        posTitle = it.posTitle,
+                        navTitle = it.navTitle,
+                        posBtn = it1,
+                        navBtn = it2
 
-            )
+                    )
+                }
+            }
         }
         productFragmentViewModel.prodcutListLiveData.observe(viewLifecycleOwner) {
             bindProduct(it)
@@ -95,23 +101,23 @@ class ProductFragment : Fragment() {
     }
 
     private fun showError(
-        title: String,
-        message: String,
-        posTitle: String,
-        posBtn: () -> Unit,
-        navTitle: String,
-        navBtn: () -> Unit
+        title: String? = null,
+        message: String? = null,
+        posTitle: String? = null,
+        posBtn: (() -> Unit),
+        navTitle: String? = null,
+        navBtn: (() -> Unit)
     ) {
-        val dialog = AlertDialog.Builder(requireActivity())
+        val builder = AlertDialog.Builder(requireActivity())
             .setTitle(title)
             .setMessage(message)
-            .setPositiveButton(posTitle) { _, _ ->
-                posBtn.invoke()
-            }
-            .setNegativeButton(navTitle) { _, _ ->
-                navBtn.invoke()
-            }
-            dialog.create().show()
+            .setPositiveButton(
+                posTitle
+            ) { dialog, which -> posBtn.invoke() }
+            .setNegativeButton(
+                navTitle
+            ) { dialog, which -> navBtn.invoke() }
+        builder.create().show()
     }
 
     override fun onDestroy() {

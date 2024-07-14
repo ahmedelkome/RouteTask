@@ -3,6 +3,7 @@ package com.route.route_task.ui.product.fragment
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.route.domain.common.ResultWrapper
 import com.route.domain.models.Product
 import com.route.domain.usecase.GetProductUseCase
 import com.route.route_task.ui.models.ViewMessage
@@ -22,21 +23,26 @@ constructor(
     var errorMessage = MutableLiveData<ViewMessage>()
     var prodcutListLiveData = MutableLiveData<List<Product>>()
     fun getAllProducts() {
-        try {
-            loadingLiveData.value = true
-            viewModelScope.launch {
-                val listOfProduct = getProductUseCase.getALlProduct()
-                prodcutListLiveData.postValue(listOfProduct)
-                loadingLiveData.value = false
+        loadingLiveData.value = true
+        viewModelScope.launch {
+            val result = getProductUseCase.getALlProduct()
+            when (result) {
+                is ResultWrapper.Failure -> {
+                    loadingLiveData.value = false
+                    errorMessage.value = ViewMessage(
+                        "Error", message = result.e.localizedMessage
+                    )
+                }
+
+                ResultWrapper.Loading -> {
+                    loadingLiveData.value = true
+                }
+
+                is ResultWrapper.Success -> {
+                    prodcutListLiveData.value = result.data
+                    loadingLiveData.value = false
+                }
             }
-        } catch (e: Exception) {
-            loadingLiveData.value = false
-            errorMessage.value = ViewMessage(
-                title = "Error",
-                message = e.localizedMessage,
-                posTitle = "OK",
-                navTitle = "Cancel"
-            )
         }
     }
 }

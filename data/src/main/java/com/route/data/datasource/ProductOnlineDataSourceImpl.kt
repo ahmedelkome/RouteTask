@@ -1,5 +1,6 @@
 package com.route.data.datasource
 
+import android.util.Log
 import com.route.data.api.WebService
 import com.route.data.contract.ProductOnlineDataSource
 import com.route.data.safe_api.safeApi
@@ -13,11 +14,11 @@ class ProductOnlineDataSourceImpl @Inject constructor(
     private val webService: WebService
 ) : ProductOnlineDataSource {
     override suspend fun getAllProduct(): ResultWrapper<List<Product>> {
-        val productList = webService.getAllProducts().products?.filterNotNull()!!.map {
-            it.toProduct()
-        }
         return safeApi {
-            ResultWrapper.Success(productList)
+            ResultWrapper.Success(webService.getAllProducts().products!!.filterNotNull().map {
+                it!!.toProduct()
+            })
         }
+
     }
 }

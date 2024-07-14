@@ -1,9 +1,12 @@
+import com.android.build.api.dsl.Packaging
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     id ("kotlin-android")
     id ("kotlin-kapt")
     id ("dagger.hilt.android.plugin")
+    id("kotlin-parcelize")
 }
 
 android {
@@ -40,6 +43,12 @@ android {
         dataBinding = true
         viewBinding = true
     }
+    fun Packaging.() {
+        exclude("META-INF/LICENSE.md")
+        exclude("META-INF/LICENSE.txt")
+        exclude("META-INF/NOTICE")
+        exclude("META-INF/NOTICE.txt")
+    }
 }
 
 kapt {
@@ -64,8 +73,11 @@ dependencies {
     // LiveData
     implementation(libs.androidx.lifecycle.livedata.ktx)
     kapt (libs.androidx.hilt.compiler)
-
     implementation (libs.androidx.fragment.ktx)
+
+    //mockk
+    testImplementation (libs.mockk)
+    androidTestImplementation (libs.mockk.android)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

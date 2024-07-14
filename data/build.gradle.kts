@@ -5,6 +5,7 @@ plugins {
     id ("kotlin-android")
     id ("kotlin-kapt")
     id ("dagger.hilt.android.plugin")
+    id("kotlin-parcelize")
 }
 
 android {
@@ -41,13 +42,16 @@ kapt {
 dependencies {
 
     //Hilt
-    implementation (libs.hilt.android)  // replace with the latest version
+    implementation (libs.hilt.android)
+    testImplementation(libs.junit.jupiter)  // replace with the latest version
     kapt (libs.hilt.compiler)
     annotationProcessor (libs.hilt.compiler)
     //Retrofit
     implementation (libs.retrofit)
     implementation (libs.converter.gson)
     implementation(libs.logging.interceptor)
+    //flow
+    implementation(libs.kotlinx.coroutines.core)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)

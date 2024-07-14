@@ -5,5 +5,5 @@ sealed class ResultWrapper<out T> {
 
     data class Success<Type>(val data:Type):ResultWrapper<Type>()
 
-    data class Failure(val e:Throwable):ResultWrapper<Nothing>()
+    data class Failure(val e:Exception):ResultWrapper<Nothing>()
 }
