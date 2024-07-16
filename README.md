@@ -1,4 +1,15 @@
 # RouteTask
+Technologies:
+
+Kotlin.
+Clean Architecture.
+Multi-Modules.
+MVVM.
+Repository Pattern.
+Hilt.
+Coroutines
+Unit Testing
+
 # 💡 Preview
 
 <p align="center">
