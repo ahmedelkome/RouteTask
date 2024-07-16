@@ -6,5 +6,5 @@ import kotlinx.coroutines.flow.Flow
 
 
 interface ProductOnlineDataSource {
-    suspend fun getAllProduct(): ResultWrapper<List<Product>>
+    suspend fun getAllProduct(): List<Product>
 }

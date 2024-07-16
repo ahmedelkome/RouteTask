@@ -6,5 +6,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface ProductRepository {
 
-    suspend fun getALlProduct(): ResultWrapper<List<Product>>
+    suspend fun getALlProduct(): Flow<ResultWrapper<List<Product>>>
 }
