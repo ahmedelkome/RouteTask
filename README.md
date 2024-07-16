@@ -1,14 +1,16 @@
 # RouteTask
-Technologies:
 
-Kotlin.
-Clean Architecture.
-Multi-Modules.
-MVVM.
-Repository Pattern.
-Hilt.
-Coroutines
-Unit Testing
+## Technologies:
+
+- Kotlin.
+- Clean Architecture.
+- Multi-Modules.
+- MVVM.
+- Repository Pattern.
+- Hilt.
+- Coroutines.
+- Flows.
+- Unit Testing
 
 # 💡 Preview
 
